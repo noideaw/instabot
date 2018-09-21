@@ -169,6 +169,9 @@ class API(object):
                     config.API_URL + endpoint)
         except Exception as e:
             self.logger.warning(str(e))
+            if "HTTPSConnectionPool" in str(e):
+                print("\nPlease check your Internet connection. Bot is changing the proxy...\n)
+                self.change_proxy()
             return False
 
         if response.status_code == 200:
@@ -190,6 +193,8 @@ class API(object):
                 response_data = json.loads(response.text)
                 msg = "Instagram's error message: {}"
                 self.logger.info(msg.format(response_data.get('message')))
+                print("Instagram has marked you as spam...\nBot is changing the proxy...)
+                self.change_proxy()
                 if 'error_type' in response_data:
                     msg = 'Error type: {}'.format(response_data['error_type'])
                     self.logger.info(msg)
