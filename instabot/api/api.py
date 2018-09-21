@@ -201,7 +201,16 @@ class API(object):
             except Exception:
                 pass
             return False
-
+        
+    #Sets a new usable proxy from getproxylist.com. It uses free api which has a 100 requests/day limit.
+    #Upgrade and use your premium key if you need more :)
+    def change_proxy(self):
+        f = urllib.request.urlopen('https://api.getproxylist.com/proxy?protocol[]=http&allowsHttps=1')
+        j = json.loads(f.read())
+        proxy = str(j['ip'])+':'+str(j['port'])
+        self.proxy = proxy
+        self.set_proxy()
+        
     @property
     def cookie_dict(self):
         return self.session.cookies.get_dict()
