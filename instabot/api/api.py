@@ -170,7 +170,7 @@ class API(object):
         except Exception as e:
             self.logger.warning(str(e))
             if "HTTPSConnectionPool" in str(e):
-                print("\nPlease check your Internet connection. Bot is changing the proxy...\n)
+                print("\nPlease check your Internet connection. Bot is changing the proxy...\n")
                 self.change_proxy()
             return False
 
@@ -193,7 +193,7 @@ class API(object):
                 response_data = json.loads(response.text)
                 msg = "Instagram's error message: {}"
                 self.logger.info(msg.format(response_data.get('message')))
-                print("Instagram has marked you as spam...\nBot is changing the proxy...)
+                print("Instagram has marked you as spam...\nBot is changing the proxy...")
                 self.change_proxy()
                 if 'error_type' in response_data:
                     msg = 'Error type: {}'.format(response_data['error_type'])
